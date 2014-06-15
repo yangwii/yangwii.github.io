@@ -4,16 +4,12 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>正在读的书 | yangpengACE`s Blog</title>
+    <title>strlen 和 sizeof的区别 | yangpengACE`s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="peng yang">
     
-    <meta name="description" content="&amp;#x6211;&amp;#x6700;&amp;#x8FD1;&amp;#x8BFB;&amp;#x7684;&amp;#x4E66;
-
-&amp;#x300A;Linux&amp;#x591A;&amp;#x7EBF;&amp;#x7A0B;&amp;#x670D;&amp;#x52A1;&amp;#x7AEF;&amp;#x7F16;&amp;#x7A0B;&amp;#x300B;
-
-&amp;#x300A;Effec">
+    <meta name="description" content="&amp;#x4F8B;&amp;#x5B50;&amp;#xFF1A;1&amp;#xFF0C;strlen(char*&amp;#xFF09;&amp;#x51FD;&amp;#x6570;&amp;#x6C42;&amp;#x7684;&amp;#x662F;&amp;#x5B57;&amp;#x7B26;&amp;#x4E32;&amp;#x7684;&amp;#x5B9E;&amp;#x9645;&amp;#x957F;&amp;">
     
     
     
@@ -72,15 +68,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2014/06/01/Books/" title="正在读的书" itemprop="url">正在读的书</a>
+      <a href="/2014/06/15/strlen_sizeof/" title="strlen 和 sizeof的区别" itemprop="url">strlen 和 sizeof的区别</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://yoursite.com" title="peng yang">peng yang</a>
     </p>
   <p class="article-time">
-    <time datetime="2014-06-01T06:21:09.000Z" itemprop="datePublished">6月 1 2014</time>
-    更新日期:<time datetime="2014-06-02T10:32:45.000Z" itemprop="dateModified">6月 2 2014</time>
+    <time datetime="2014-06-15T12:38:29.000Z" itemprop="datePublished">6月 15 2014</time>
+    更新日期:<time datetime="2014-06-15T12:45:23.000Z" itemprop="dateModified">6月 15 2014</time>
     
   </p>
 </header>
@@ -89,33 +85,21 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#&#x6211;&#x6700;&#x8FD1;&#x8BFB;&#x7684;&#x4E66;"><span class="toc-number">1.</span> <span class="toc-text">&#x6211;&#x6700;&#x8FD1;&#x8BFB;&#x7684;&#x4E66;</span></a></li></ol>
+		
 		</div>
 		
-		<h2 id="&#x6211;&#x6700;&#x8FD1;&#x8BFB;&#x7684;&#x4E66;">&#x6211;&#x6700;&#x8FD1;&#x8BFB;&#x7684;&#x4E66;</h2>
-<ul>
-<li><p>&#x300A;Linux&#x591A;&#x7EBF;&#x7A0B;&#x670D;&#x52A1;&#x7AEF;&#x7F16;&#x7A0B;&#x300B;</p>
-</li>
-<li><p>&#x300A;Effective C++&#x300B;</p>
-</li>
-<li><p>&#x300A;&#x5F81;&#x670D;C&#x6307;&#x9488;&#x300B;</p>
-</li>
-</ul>
+		<p>&#x4F8B;&#x5B50;&#xFF1A;<br>1&#xFF0C;strlen(char*&#xFF09;&#x51FD;&#x6570;&#x6C42;&#x7684;&#x662F;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x5B9E;&#x9645;&#x957F;&#x5EA6;&#xFF0C;&#x5B83;&#x6C42;&#x5F97;&#x65B9;&#x6CD5;&#x662F;&#x4ECE;&#x5F00;&#x59CB;&#x5230;&#x9047;&#x5230;&#x7B2C;&#x4E00;&#x4E2A;&#x2019;\0&#x2019;&#xFF0C;<br>&#x5982;&#x679C;&#x4F60;&#x53EA;&#x5B9A;&#x4E49;&#x6CA1;&#x6709;&#x7ED9;&#x5B83;&#x8D4B;&#x521D;&#x503C;&#xFF0C;&#x8FD9;&#x4E2A;&#x7ED3;&#x679C;&#x662F;&#x4E0D;&#x5B9A;&#x7684;&#xFF0C;&#x5B83;&#x4F1A;&#x4ECE;aa&#x9996;&#x5730;&#x5740;&#x4E00;&#x76F4;&#x627E;&#x4E0B;&#x53BB;&#xFF0C;&#x76F4;&#x5230;&#x9047;&#x5230;&#x2019;\0&#x2019;&#x505C;&#x6B62;&#x3002;<br>char aa[10];cout&lt;&lt;strlen(aa)&lt;&lt;endl; //&#x7ED3;&#x679C;&#x662F;&#x4E0D;&#x5B9A;&#x7684;<br>char aa[10]={&#x2018;\0&#x2019;}; cout&lt;&lt;strlen(aa)&lt;&lt;endl; //&#x7ED3;&#x679C;&#x4E3A;0<br>char aa[10]=&#x201D;jun&#x201D;; cout&lt;&lt;strlen(aa)&lt;&lt;endl; //&#x7ED3;&#x679C;&#x4E3A;3<br>2&#xFF0C;sizeof&#xFF08;&#xFF09;&#x8FD4;&#x56DE;&#x7684;&#x662F;&#x53D8;&#x91CF;&#x58F0;&#x660E;&#x540E;&#x6240;&#x5360;&#x7684;&#x5185;&#x5B58;&#x6570;&#xFF0C;&#x4E0D;&#x662F;&#x5B9E;&#x9645;&#x957F;&#x5EA6;&#xFF0C;&#x6B64;&#x5916;sizeof&#x4E0D;&#x662F;&#x51FD;&#x6570;&#xFF0C;&#x4EC5;&#x4EC5;&#x662F;&#x4E00;&#x4E2A;&#x64CD;&#x4F5C;&#x7B26;&#xFF0C;strlen&#x662F;&#x51FD;&#x6570;&#x3002;<br>sizeof(aa) &#x8FD4;&#x56DE;10<br>int a[10]; sizeof(a) &#x8FD4;&#x56DE;40</p>
+<p>&#x5177;&#x4F53;&#x7684;&#x533A;&#x522B;&#xFF1A;<br>1&#xFF0C;sizeof&#x64CD;&#x4F5C;&#x7B26;&#x7684;&#x7ED3;&#x679C;&#x7C7B;&#x578B;&#x662F;size_t&#xFF0C;&#x5B83;&#x5728;&#x5934;&#x6587;&#x4EF6;&#x4E2D;typedef&#x4E3A;unsigned&#x3000;int&#x7C7B;&#x578B;&#x3002;<br>   &#x8BE5;&#x7C7B;&#x578B;&#x4FDD;&#x8BC1;&#x80FD;&#x5BB9;&#x7EB3;&#x5B9E;&#x73B0;&#x6240;&#x5EFA;&#x7ACB;&#x7684;&#x6700;&#x5927;&#x5BF9;&#x8C61;&#x7684;&#x5B57;&#x8282;&#x5927;&#x5C0F;&#x3002;<br>2&#xFF0C;sizeof&#x662F;&#x64CD;&#x4F5C;&#x7B26;&#xFF08;&#x5173;&#x952E;&#x5B57;&#xFF09;&#xFF0C;strlen&#x662F;&#x51FD;&#x6570;<br>3&#xFF0C;sizeof&#x53EF;&#x4EE5;&#x7528;&#x7C7B;&#x578B;&#x505A;&#x53C2;&#x6570;&#xFF0C;strlen&#x53EA;&#x80FD;&#x7528;char*&#x505A;&#x53C2;&#x6570;&#xFF0C;&#x4E14;&#x5FC5;&#x987B;&#x662F;&#x4EE5;&#x2019;&#x2019;\0&#x2019;&#x2019;&#x7ED3;&#x5C3E;&#x7684;&#x3002;<br>   sizeof&#x8FD8;&#x53EF;&#x4EE5;&#x7528;&#x51FD;&#x6570;&#x505A;&#x53C2;&#x6570;&#xFF0C;&#x6BD4;&#x5982;&#xFF1A;<br>   short f();<br>   printf(&#x201C;%d\n&#x201D;,sizeof(f()));<br>   &#x8F93;&#x51FA;&#x7684;&#x7ED3;&#x679C;&#x662F;sizeof(short&#xFF09;&#xFF0C;&#x5373;2&#x3002;<br>4&#xFF0C;&#x6570;&#x7EC4;&#x505A;sizeof&#x7684;&#x53C2;&#x6570;&#x4E0D;&#x9000;&#x5316;&#xFF0C;&#x4F20;&#x9012;&#x7ED9;strlen&#x5C31;&#x9000;&#x5316;&#x4E3A;&#x6307;&#x9488;&#x4E86;&#x3002;&#x5982;&#x4F8B;&#x5B50;&#x6240;&#x793A;&#x3002;<br>5&#xFF0C;&#x5927;&#x90E8;&#x5206;&#x7F16;&#x8BD1;&#x7A0B;&#x5E8F; &#x5728;&#x7F16;&#x8BD1;&#x7684;&#x65F6;&#x5019;&#x5C31;&#x628A;sizeof&#x8BA1;&#x7B97;&#x8FC7;&#x4E86;&#x662F;&#x7C7B;&#x578B;&#x6216;&#x662F;&#x53D8;&#x91CF;&#x7684;&#x957F;&#x5EA6;&#x8FD9;&#x5C31;&#x662F;sizeof(x&#xFF09;&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x5B9A;&#x4E49;&#x6570;&#x7EC4;&#x7EF4;&#x6570;&#x7684;&#x539F;&#x56E0;<br>   char str[20]=&#x201D;0123456789&#x201D;;<br>   int a=strlen(str); //a=10;<br>   int b=sizeof(str); //&#x800C;b=20;<br>   strlen&#x7684;&#x7ED3;&#x679C;&#x8981;&#x5728;&#x8FD0;&#x884C;&#x7684;&#x65F6;&#x5019;&#x624D;&#x80FD;&#x8BA1;&#x7B97;&#x51FA;&#x6765;&#xFF0C;&#x662F;&#x7528;&#x6765;&#x8BA1;&#x7B97;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x957F;&#x5EA6;&#xFF0C;&#x4E0D;&#x662F;&#x7C7B;&#x578B;&#x5360;&#x5185;&#x5B58;&#x7684;&#x5927;&#x5C0F;&#x3002;</p>
   
 	</div>
 		<footer class="article-footer clearfix">
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Books/">Books</a>
-  </div>
 
 
 
 
 <div class="article-share" id="share">
 
-  <div data-url="http://yoursite.com/2014/06/01/Books/" data-title="正在读的书 | yangpengACE`s Blog" data-tsina="null" class="share clearfix">
+  <div data-url="http://yoursite.com/2014/06/15/strlen_sizeof/" data-title="strlen 和 sizeof的区别 | yangpengACE`s Blog" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -124,14 +108,14 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2014/06/03/LinuxThread/" title="《Linux多线程编程》读书笔记">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  《Linux多线程编程》读书笔记</span>
+
+<div class="next">
+<a href="/2014/06/03/LinuxThread/"  title="《Linux多线程编程》读书笔记">
+ <strong>NEXT:</strong><br/> 
+ <span>《Linux多线程编程》读书笔记
+</span>
 </a>
 </div>
-
 
 </nav>
 
@@ -141,7 +125,7 @@
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#&#x6211;&#x6700;&#x8FD1;&#x8BFB;&#x7684;&#x4E66;"><span class="toc-number">1.</span> <span class="toc-text">&#x6211;&#x6700;&#x8FD1;&#x8BFB;&#x7684;&#x4E66;</span></a></li></ol>
+  
   </div>
 
 <div id="asidepart">
