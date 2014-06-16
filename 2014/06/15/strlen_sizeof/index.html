@@ -9,7 +9,10 @@
     
     <meta name="author" content="peng yang">
     
-    <meta name="description" content="&amp;#x4F8B;&amp;#x5B50;&amp;#xFF1A;1&amp;#xFF0C;strlen(char*&amp;#xFF09;&amp;#x51FD;&amp;#x6570;&amp;#x6C42;&amp;#x7684;&amp;#x662F;&amp;#x5B57;&amp;#x7B26;&amp;#x4E32;&amp;#x7684;&amp;#x5B9E;&amp;#x9645;&amp;#x957F;&amp;">
+    <meta name="description" content="例子：
+
+
+strlen(char*）函数求的是字符串的实际长度，它求得方法是从开始到遇到第一个’\0’，如果你只定义没有给它赋初值，这个结果是不定的，它会从aa首地址一直找下去，直到遇到’\0’停止。char aa[10];cout&amp;lt;&amp;lt;strlen(aa)&amp;lt;&amp;lt;endl; /">
     
     
     
@@ -76,7 +79,7 @@
     </p>
   <p class="article-time">
     <time datetime="2014-06-15T12:38:29.000Z" itemprop="datePublished">6月 15 2014</time>
-    更新日期:<time datetime="2014-06-15T12:53:22.000Z" itemprop="dateModified">6月 15 2014</time>
+    更新日期:<time datetime="2014-06-16T11:06:25.000Z" itemprop="dateModified">6月 16 2014</time>
     
   </p>
 </header>
@@ -88,9 +91,26 @@
 		
 		</div>
 		
-		<p>&#x4F8B;&#x5B50;&#xFF1A;<br>1&#xFF0C;strlen(char*&#xFF09;&#x51FD;&#x6570;&#x6C42;&#x7684;&#x662F;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x5B9E;&#x9645;&#x957F;&#x5EA6;&#xFF0C;&#x5B83;&#x6C42;&#x5F97;&#x65B9;&#x6CD5;&#x662F;&#x4ECE;&#x5F00;&#x59CB;&#x5230;&#x9047;&#x5230;&#x7B2C;&#x4E00;&#x4E2A;&#x2019;\0&#x2019;&#xFF0C;<br>&#x5982;&#x679C;&#x4F60;&#x53EA;&#x5B9A;&#x4E49;&#x6CA1;&#x6709;&#x7ED9;&#x5B83;&#x8D4B;&#x521D;&#x503C;&#xFF0C;&#x8FD9;&#x4E2A;&#x7ED3;&#x679C;&#x662F;&#x4E0D;&#x5B9A;&#x7684;&#xFF0C;&#x5B83;&#x4F1A;&#x4ECE;aa&#x9996;&#x5730;&#x5740;&#x4E00;&#x76F4;&#x627E;&#x4E0B;&#x53BB;&#xFF0C;&#x76F4;&#x5230;&#x9047;&#x5230;&#x2019;\0&#x2019;&#x505C;&#x6B62;&#x3002;<br>char aa[10];cout&lt;&lt;strlen(aa)&lt;&lt;endl; //&#x7ED3;&#x679C;&#x662F;&#x4E0D;&#x5B9A;&#x7684;<br>char aa[10]={&#x2018;\0&#x2019;}; cout&lt;&lt;strlen(aa)&lt;&lt;endl; //&#x7ED3;&#x679C;&#x4E3A;0<br>char aa[10]=&#x201D;jun&#x201D;; cout&lt;&lt;strlen(aa)&lt;&lt;endl; //&#x7ED3;&#x679C;&#x4E3A;3<br>2&#xFF0C;sizeof&#xFF08;&#xFF09;&#x8FD4;&#x56DE;&#x7684;&#x662F;&#x53D8;&#x91CF;&#x58F0;&#x660E;&#x540E;&#x6240;&#x5360;&#x7684;&#x5185;&#x5B58;&#x6570;&#xFF0C;&#x4E0D;&#x662F;&#x5B9E;&#x9645;&#x957F;&#x5EA6;&#xFF0C;&#x6B64;&#x5916;sizeof&#x4E0D;&#x662F;&#x51FD;&#x6570;&#xFF0C;&#x4EC5;&#x4EC5;&#x662F;&#x4E00;&#x4E2A;&#x64CD;&#x4F5C;&#x7B26;&#xFF0C;strlen&#x662F;&#x51FD;&#x6570;&#x3002;<br>sizeof(aa) &#x8FD4;&#x56DE;10<br>int a[10]; sizeof(a) &#x8FD4;&#x56DE;40</p>
-<p>&#x5177;&#x4F53;&#x7684;&#x533A;&#x522B;&#xFF1A;<br>1&#xFF0C;sizeof&#x64CD;&#x4F5C;&#x7B26;&#x7684;&#x7ED3;&#x679C;&#x7C7B;&#x578B;&#x662F;size_t&#xFF0C;&#x5B83;&#x5728;&#x5934;&#x6587;&#x4EF6;&#x4E2D;typedef&#x4E3A;unsigned&#x3000;int&#x7C7B;&#x578B;&#x3002;<br>   &#x8BE5;&#x7C7B;&#x578B;&#x4FDD;&#x8BC1;&#x80FD;&#x5BB9;&#x7EB3;&#x5B9E;&#x73B0;&#x6240;&#x5EFA;&#x7ACB;&#x7684;&#x6700;&#x5927;&#x5BF9;&#x8C61;&#x7684;&#x5B57;&#x8282;&#x5927;&#x5C0F;&#x3002;<br>2&#xFF0C;sizeof&#x662F;&#x64CD;&#x4F5C;&#x7B26;&#xFF08;&#x5173;&#x952E;&#x5B57;&#xFF09;&#xFF0C;strlen&#x662F;&#x51FD;&#x6570;<br>3&#xFF0C;sizeof&#x53EF;&#x4EE5;&#x7528;&#x7C7B;&#x578B;&#x505A;&#x53C2;&#x6570;&#xFF0C;strlen&#x53EA;&#x80FD;&#x7528;char*&#x505A;&#x53C2;&#x6570;&#xFF0C;&#x4E14;&#x5FC5;&#x987B;&#x662F;&#x4EE5;&#x2019;&#x2019;\0&#x2019;&#x2019;&#x7ED3;&#x5C3E;&#x7684;&#x3002;<br>   sizeof&#x8FD8;&#x53EF;&#x4EE5;&#x7528;&#x51FD;&#x6570;&#x505A;&#x53C2;&#x6570;&#xFF0C;&#x6BD4;&#x5982;&#xFF1A;<br>   short f();<br>   printf(&#x201C;%d\n&#x201D;,sizeof(f()));<br>   &#x8F93;&#x51FA;&#x7684;&#x7ED3;&#x679C;&#x662F;sizeof(short&#xFF09;&#xFF0C;&#x5373;2&#x3002;<br>4&#xFF0C;&#x6570;&#x7EC4;&#x505A;sizeof&#x7684;&#x53C2;&#x6570;&#x4E0D;&#x9000;&#x5316;&#xFF0C;&#x4F20;&#x9012;&#x7ED9;strlen&#x5C31;&#x9000;&#x5316;&#x4E3A;&#x6307;&#x9488;&#x4E86;&#x3002;&#x5982;&#x4F8B;&#x5B50;&#x6240;&#x793A;&#x3002;<br>5&#xFF0C;&#x5927;&#x90E8;&#x5206;&#x7F16;&#x8BD1;&#x7A0B;&#x5E8F; &#x5728;&#x7F16;&#x8BD1;&#x7684;&#x65F6;&#x5019;&#x5C31;&#x628A;sizeof&#x8BA1;&#x7B97;&#x8FC7;&#x4E86;&#x662F;&#x7C7B;&#x578B;&#x6216;&#x662F;&#x53D8;&#x91CF;&#x7684;&#x957F;&#x5EA6;&#x8FD9;&#x5C31;&#x662F;sizeof(x&#xFF09;&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x5B9A;&#x4E49;&#x6570;&#x7EC4;&#x7EF4;&#x6570;&#x7684;&#x539F;&#x56E0;<br>   char str[20]=&#x201D;0123456789&#x201D;;<br>   int a=strlen(str); //a=10;<br>   int b=sizeof(str); //&#x800C;b=20;<br>   strlen&#x7684;&#x7ED3;&#x679C;&#x8981;&#x5728;&#x8FD0;&#x884C;&#x7684;&#x65F6;&#x5019;&#x624D;&#x80FD;&#x8BA1;&#x7B97;&#x51FA;&#x6765;&#xFF0C;&#x662F;&#x7528;&#x6765;&#x8BA1;&#x7B97;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x957F;&#x5EA6;&#xFF0C;&#x4E0D;&#x662F;&#x7C7B;&#x578B;&#x5360;&#x5185;&#x5B58;&#x7684;&#x5927;&#x5C0F;&#x3002;</p>
-<p>&#x518D;&#x770B;&#x4E00;&#x4E2A;&#x4F8B;&#x5B50;&#xFF1A;<br>char str[20]=&#x201D;0123456789&#x201D;;<br>int a=strlen(str); //a=10; &gt;&gt;&gt;&gt; strlen &#x8BA1;&#x7B97;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x957F;&#x5EA6;&#xFF0C;&#x4EE5;&#x7ED3;&#x675F;&#x7B26; 0x00 &#x4E3A;&#x5B57;&#x7B26;&#x4E32;&#x7ED3;&#x675F;&#x3002;<br>int b=sizeof(str); //&#x800C;b=20; &gt;&gt;&gt;&gt; sizeof &#x8BA1;&#x7B97;&#x7684;&#x5219;&#x662F;&#x5206;&#x914D;&#x7684;&#x6570;&#x7EC4; str[20] &#x6240;&#x5360;&#x7684;&#x5185;&#x5B58;&#x7A7A;&#x95F4;&#x7684;&#x5927;&#x5C0F;&#xFF0C;&#x4E0D;&#x53D7;&#x91CC;&#x9762;&#x5B58;&#x50A8;&#x7684;&#x5185;&#x5BB9;&#x6539;&#x53D8;&#x3002;<br>&#x4E0A;&#x9762;&#x662F;&#x5BF9;&#x9759;&#x6001;&#x6570;&#x7EC4;&#x5904;&#x7406;&#x7684;&#x7ED3;&#x679C;&#xFF0C;&#x5982;&#x679C;&#x662F;&#x5BF9;&#x6307;&#x9488;&#xFF0C;&#x7ED3;&#x679C;&#x5C31;&#x4E0D;&#x4E00;&#x6837;&#x4E86;<br>char<em> ss = &#x201C;0123456789&#x201D;;<br>sizeof(ss) &#x7ED3;&#x679C; 4&gt;&gt;&gt;&gt;ss&#x662F;&#x6307;&#x5411;&#x5B57;&#x7B26;&#x4E32;&#x5E38;&#x91CF;&#x7684;&#x5B57;&#x7B26;&#x6307;&#x9488;&#xFF0C;sizeof &#x83B7;&#x5F97;&#x7684;&#x662F;&#x4E00;&#x4E2A;&#x6307;&#x9488;&#x7684;&#x503C;&#x6240;&#x5360;&#x7684;&#x7A7A;&#x95F4;&#xFF0C;&#x5E94;&#x8BE5;&#x662F;&#x957F;&#x6574;&#x578B;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x662F;4<br>sizeof(</em>ss) &#x7ED3;&#x679C; 1&gt;&gt;&gt;&gt; *ss&#x662F;&#x7B2C;&#x4E00;&#x4E2A;&#x5B57;&#x7B26; &#x5176;&#x5B9E;&#x5C31;&#x662F;&#x83B7;&#x5F97;&#x4E86;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x7B2C;&#x4E00;&#x4F4D;&#x2019;0&#x2019; &#x6240;&#x5360;&#x7684;&#x5185;&#x5B58;&#x7A7A;&#x95F4;&#xFF0C;&#x662F;char&#x7C7B;&#x578B;&#x7684;&#xFF0C;&#x5360;&#x4E86; 1 &#x4F4D;<br>strlen(ss)= 10 &gt;&gt;&gt;&gt; &#x5982;&#x679C;&#x8981;&#x83B7;&#x5F97;&#x8FD9;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x957F;&#x5EA6;&#xFF0C;&#x5219;&#x4E00;&#x5B9A;&#x8981;&#x4F7F;&#x7528; strlen<br>sizeof&#x8FD4;&#x56DE;&#x5BF9;&#x8C61;&#x6240;&#x5360;&#x7528;&#x7684;&#x5B57;&#x8282;&#x5927;&#x5C0F;.<br>strlen&#x8FD4;&#x56DE;&#x5B57;&#x7B26;&#x4E2A;&#x6570;.</p>
+		<ul>
+<li>例子：</li>
+</ul>
+<ol>
+<li>strlen(char*）函数求的是字符串的实际长度，它求得方法是从开始到遇到第一个’\0’，<br>如果你只定义没有给它赋初值，这个结果是不定的，它会从aa首地址一直找下去，直到遇到’\0’停止。<br>char aa[10];cout&lt;&lt;strlen(aa)&lt;&lt;endl; //结果是不定的<br>char aa[10]={‘\0’}; cout&lt;&lt;strlen(aa)&lt;&lt;endl; //结果为0<br>char aa[10]=”jun”; cout&lt;&lt;strlen(aa)&lt;&lt;endl; //结果为3</li>
+<li>sizeof（）返回的是变量声明后所占的内存数，不是实际长度，此外sizeof不是函数，仅仅是一个操作符，strlen是函数。<br>sizeof(aa) 返回10<br>int a[10]; sizeof(a) 返回40</li>
+</ol>
+<ul>
+<li>具体的区别：</li>
+</ul>
+<ol>
+<li>sizeof操作符的结果类型是size_t，它在头文件中typedef为unsigned　int类型。<br>该类型保证能容纳实现所建立的最大对象的字节大小。</li>
+<li>sizeof是操作符（关键字），strlen是函数</li>
+<li>sizeof可以用类型做参数，strlen只能用char*做参数，且必须是以’’\0’’结尾的。<br>sizeof还可以用函数做参数，比如：<br>short f();<br>printf(“%d\n”,sizeof(f()));<br>输出的结果是sizeof(short），即2。</li>
+<li>数组做sizeof的参数不退化，传递给strlen就退化为指针了。如例子所示。</li>
+<li>大部分编译程序 在编译的时候就把sizeof计算过了是类型或是变量的长度这就是sizeof(x）可以用来定义数组维数的原因<br>char str[20]=”0123456789”;<br>int a=strlen(str); //a=10;<br>int b=sizeof(str); //而b=20;<br>strlen的结果要在运行的时候才能计算出来，是用来计算字符串的长度，不是类型占内存的大小。</li>
+</ol>
+<ul>
+<li>再看一个例子：<br>char str[20]=”0123456789”;<br>int a=strlen(str); //a=10; &gt;&gt;&gt;&gt; strlen 计算字符串的长度，以结束符 0x00 为字符串结束。<br>int b=sizeof(str); //而b=20; &gt;&gt;&gt;&gt; sizeof 计算的则是分配的数组 str[20] 所占的内存空间的大小，不受里面存储的内容改变。<br>上面是对静态数组处理的结果，如果是对指针，结果就不一样了<br>char<em> ss = “0123456789”;<br>sizeof(ss) 结果 4&gt;&gt;&gt;&gt;ss是指向字符串常量的字符指针，sizeof 获得的是一个指针的值所占的空间，应该是长整型的，所以是4<br>sizeof(</em>ss) 结果 1&gt;&gt;&gt;&gt; *ss是第一个字符 其实就是获得了字符串的第一位’0’ 所占的内存空间，是char类型的，占了 1 位<br>strlen(ss)= 10 &gt;&gt;&gt;&gt; 如果要获得这个字符串的长度，则一定要使用 strlen<br>sizeof返回对象所占用的字节大小.<br>strlen返回字符个数.</li>
+</ul>
   
 	</div>
 		<footer class="article-footer clearfix">
