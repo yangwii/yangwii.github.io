@@ -81,7 +81,7 @@ include的缺点： 让编译效率降低。留下安">
     </p>
   <p class="article-time">
     <time datetime="2014-06-19T09:08:20.000Z" itemprop="datePublished">6月 19 2014</time>
-    更新日期:<time datetime="2014-06-19T09:09:35.000Z" itemprop="dateModified">6月 19 2014</time>
+    更新日期:<time datetime="2014-06-19T13:33:36.000Z" itemprop="dateModified">6月 19 2014</time>
     
   </p>
 </header>
@@ -130,7 +130,7 @@ include的缺点： 让编译效率降低。留下安">
 </ul>
 <h5 id="模板，虚函数">模板，虚函数</h5>
 <ul>
-<li>模板的定义一般要放到头文件中，否则会有编译错误，但是所谓的编译错误只是链接错误，有办法将模板的实现<br>放到<em>.cc文件里，头文件里只放声明，前提是你知道模板会有那些具体化类型，并事先显式具体化出来。如：<br>template<typename t=""><br>T bar(const T&amp; x)<br>{<br>  /….<br>}<br>template char bar(const char&amp;);//</typename></em>.cc 具体化</li>
+<li>模板的定义一般要放到头文件中，否则会有编译错误，但是所谓的编译错误只是链接错误，有办法将模板的实现<br>放到 *.cc文件里，头文件里只放声明，前提是你知道模板会有那些具体化类型，并事先显式具体化出来。如：<br>template<typename t=""><br>T bar(const T&amp; x)<br>{<br>  /….<br>}<br>template char bar(const char&amp;);// *.cc 具体化</typename></li>
 <li>虚函数</li>
 <li>虚函数的调用是通过虚函数表（vtable）进行的，每个多态的class都应该有一份vtable。定义或继承了虚函数的<br>对象中会有一个隐含的成员：指向vtable的指针，即vptr。在析构或者构造对象的时候，编译器会修改vptr成员。</li>
 </ul>
@@ -173,6 +173,14 @@ include的缺点： 让编译效率降低。留下安">
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2014/06/19/longestpalindrome/" title="求字符串的最长回文子串--o(n) Manacher算法">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  求字符串的最长回文子串--o(n) Manacher算法</span>
+</a>
+</div>
+
 
 <div class="next">
 <a href="/2014/06/16/pic/"  title="权利的游戏S04E10">

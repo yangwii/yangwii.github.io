@@ -4,15 +4,13 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>strlen 和 sizeof的区别 | yangpengACE`s Blog</title>
+    <title>求字符串的最长回文子串--o(n) Manacher算法 | yangpengACE`s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="peng yang">
     
-    <meta name="description" content="例子：
-
-
-strlen(char*）函数求的是字符串的实际长度，它求得方法是从开始到遇到第一个’\0’，如果你只定义没有给它赋初值，这个结果是不定的，它会从aa首地址一直找下去，直到遇到’\0’停止。char aa[10];cout&amp;lt;&amp;lt;strlen(aa)&amp;lt;&amp;lt;endl; /">
+    <meta name="description" content="这个算法有一个很巧妙的地方，它把奇数的回文串和偶数的回文串统一起来考虑了。这一点一直是在做回文串问题中时比较烦的地方。这个算法还有一个很好的地方就是充分利用了字符匹配的特殊性，避免了大量不必要的重复匹配。
+算法大致过程是这样。先在每两个相邻字符中间插入一个分隔符，当然这个分  隔符要在原串中没有出现">
     
     
     
@@ -71,15 +69,15 @@ strlen(char*）函数求的是字符串的实际长度，它求得方法是从�
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2014/06/15/strlen_sizeof/" title="strlen 和 sizeof的区别" itemprop="url">strlen 和 sizeof的区别</a>
+      <a href="/2014/06/19/longestpalindrome/" title="求字符串的最长回文子串--o(n) Manacher算法" itemprop="url">求字符串的最长回文子串--o(n) Manacher算法</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://yoursite.com" title="peng yang">peng yang</a>
     </p>
   <p class="article-time">
-    <time datetime="2014-06-15T12:38:29.000Z" itemprop="datePublished">6月 15 2014</time>
-    更新日期:<time datetime="2014-06-19T13:35:14.000Z" itemprop="dateModified">6月 19 2014</time>
+    <time datetime="2014-06-19T13:03:35.000Z" itemprop="datePublished">6月 19 2014</time>
+    更新日期:<time datetime="2014-06-19T13:31:26.000Z" itemprop="dateModified">6月 19 2014</time>
     
   </p>
 </header>
@@ -88,29 +86,38 @@ strlen(char*）函数求的是字符串的实际长度，它求得方法是从�
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		
+		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#注明：本文来源于网络，我只是在这里做一个备份。"><span class="toc-number">1.</span> <span class="toc-text">注明：本文来源于网络，我只是在这里做一个备份。</span></a></li></ol>
 		</div>
 		
 		<ul>
-<li>例子：</li>
+<li>这个算法有一个很巧妙的地方，它把奇数的回文串和偶数的回文串统一起来考虑了。<br>这一点一直是在做回文串问题中时比较烦的地方。这个算法还有一个很好的地方就<br>是充分利用了字符匹配的特殊性，避免了大量不必要的重复匹配。</li>
+<li>算法大致过程是这样。先在每两个相邻字符中间插入一个分隔符，当然这个分<br>  隔符要在原串中没有出现过。一般可以用‘#’分隔。这样就非常巧妙的将奇数<br>  长度回文串与偶数长度回文串统一起来考虑了（见下面的一个例子，回文串长度<br>  全为奇数了），然后用一个辅助数组P记录以每个字符为中心的最长回文串的信息。<br>  P［id］记录的是以字符str［id］为中心的最长回文串，当以str［id］为第一个字符，<br>  这个最长回文串向右延伸了P［id］个字符。<br>  原串：        w aa bwsw f d<br>  新串：        # w# a # a # b# w # s # w # f # d #<br>  辅助数组P：   1 2 1 2 3 2 1 2 1 2 1 4 1 2 1 2 1 2 1</li>
+<li>这里有一个很好的性质，P［id］-1就是该回文子串在原串中的长度（包括‘#’）。<br>如果这里不是特别清楚，可以自己拿出纸来画一画，自己体会体会。<br>当然这里可能每个人写法不尽相同，不过我想大致思路应该是一样的吧。<br>  好，我们继续。现在的关键问题就在于怎么在O（n）时间复杂度内求出P数组了。<br>  只要把这个P数组求出来，最长回文子串就可以直接扫一遍得出来了。<br>  由于这个算法是线性从前往后扫的。那么当我们准备求P［i］的时候，<br>  i以前的P［j］我们是已经得到了的。我们用mx记在i之前的回文串中，<br>  延伸至最右端的位置。同时用id这个变量记下取得这个最优mx时的id值。<br>  （注：为了防止字符比较的时候越界，我在这个加了‘#’的字符串之前还加了另一个特殊字符‘$’，<br>  故我的新串下标是从1开始的）<br>好，到这里，我们可以先贴一份代码了。<pre><code>  <span class="keyword">void</span> pk()
+  {
+      <span class="keyword">int</span> i;
+      <span class="keyword">int</span> mx = <span class="number">0</span>;
+      <span class="keyword">int</span> <span class="keyword">id</span>;
+      <span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;n; i++)
+      {
+          <span class="keyword">if</span>( mx &gt; i )
+              p[i] = MIN( p[<span class="number">2</span>*<span class="keyword">id</span>-i], mx-i );        
+          <span class="keyword">else</span>
+              p[i] = <span class="number">1</span>;
+          <span class="keyword">for</span>(; str[i+p[i]] == str[i-p[i]]; p[i]++)
+              ;
+          <span class="keyword">if</span>( p[i] + i &gt; mx )
+          {
+              mx = p[i] + i;
+              <span class="keyword">id</span> = i;
+          }
+      }
+  }
+</code></pre></li>
+<li>p[i] = MIN( p[2 * id-i], mx-i )的解释：</li>
+<li>当 mx - i &gt; P[j] (j = 2 * id-i)的时候，以S[j]为中心的回文子串包含在以S[id]为中心的回文子串中，<br>由于 i 和 j 对称，以S[i]为中心的回文子串必然包含在以S[id]为中心的回文子串中，所以必有 P[i] = P[j]，<br>见下图。<br><img src="/img/lp1.png" alt="mx - i &gt; P[j]图中的2 \* id-i就是i关于id的堆成点"></li>
+<li>当 P[j] &gt;= mx - i 的时候，以S[j]为中心的回文子串不一定完全包含于以S[id]为中心的回文子串中，但是<br>基于对称性可知，下图中两个绿框所包围的部分是相同的，也就是说以S[i]为中心的回文子串，其向右至少会扩张<br>到mx的位置，也就是说 P[i] &gt;= mx - i。至于mx之后的部分是否对称，就只能老老实实去匹配了。<br><img src="/img/lp2.png" alt="P[j] &gt;= mx - i "></li>
 </ul>
-<ol>
-<li>strlen(char*）函数求的是字符串的实际长度，它求得方法是从开始到遇到第一个’\0’，<br>如果你只定义没有给它赋初值，这个结果是不定的，它会从aa首地址一直找下去，直到遇到’\0’停止。<br>char aa[10];cout&lt;&lt;strlen(aa)&lt;&lt;endl; //结果是不定的<br>char aa[10]={‘\0’}; cout&lt;&lt;strlen(aa)&lt;&lt;endl; //结果为0<br>char aa[10]=”jun”; cout&lt;&lt;strlen(aa)&lt;&lt;endl; //结果为3</li>
-<li>sizeof（）返回的是变量声明后所占的内存数，不是实际长度，此外sizeof不是函数，仅仅是一个操作符，strlen是函数。<br>sizeof(aa) 返回10<br>int a[10]; sizeof(a) 返回40</li>
-</ol>
-<ul>
-<li>具体的区别：</li>
-</ul>
-<ol>
-<li>sizeof操作符的结果类型是size_t，它在头文件中typedef为unsigned　int类型。<br>该类型保证能容纳实现所建立的最大对象的字节大小。</li>
-<li>sizeof是操作符（关键字），strlen是函数</li>
-<li>sizeof可以用类型做参数，strlen只能用char*做参数，且必须是以’’\0’’结尾的。<br>sizeof还可以用函数做参数，比如：<br>short f();<br>printf(“%d\n”,sizeof(f()));<br>输出的结果是sizeof(short），即2。</li>
-<li>数组做sizeof的参数不退化，传递给strlen就退化为指针了。如例子所示。</li>
-<li>大部分编译程序 在编译的时候就把sizeof计算过了是类型或是变量的长度这就是sizeof(x）可以用来定义数组维数的原因<br>char str[20]=”0123456789”;<br>int a=strlen(str); //a=10;<br>int b=sizeof(str); //而b=20;<br>strlen的结果要在运行的时候才能计算出来，是用来计算字符串的长度，不是类型占内存的大小。</li>
-</ol>
-<ul>
-<li>再看一个例子：<br>char str[20]=”0123456789”;<br>int a=strlen(str); //a=10; &gt;&gt;&gt;&gt; strlen 计算字符串的长度，以结束符 0x00 为字符串结束。<br>int b=sizeof(str); //而b=20; &gt;&gt;&gt;&gt; sizeof 计算的则是分配的数组 str[20] 所占的内存空间的大小，不受里面存储的内容改变。<br>上面是对静态数组处理的结果，如果是对指针，结果就不一样了<br>char* ss = “0123456789”;<br>sizeof(ss) 结果 4&gt;&gt;&gt;&gt;ss是指向字符串常量的字符指针，sizeof 获得的是一个指针的值所占的空间，应该是长整型的，所以是4<br>sizeof(*ss) 结果 1&gt;&gt;&gt;&gt; *ss是第一个字符 其实就是获得了字符串的第一位’0’ 所占的内存空间，是char类型的，占了 1 位<br>strlen(ss)= 10 &gt;&gt;&gt;&gt; 如果要获得这个字符串的长度，则一定要使用 strlen<br>sizeof返回对象所占用的字节大小.<br>strlen返回字符个数.</li>
-</ul>
+<h3 id="注明：本文来源于网络，我只是在这里做一个备份。">注明：本文来源于网络，我只是在这里做一个备份。</h3>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -120,7 +127,7 @@ strlen(char*）函数求的是字符串的实际长度，它求得方法是从�
 
 <div class="article-share" id="share">
 
-  <div data-url="http://yoursite.com/2014/06/15/strlen_sizeof/" data-title="strlen 和 sizeof的区别 | yangpengACE`s Blog" data-tsina="null" class="share clearfix">
+  <div data-url="http://yoursite.com/2014/06/19/longestpalindrome/" data-title="求字符串的最长回文子串--o(n) Manacher算法 | yangpengACE`s Blog" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -129,19 +136,11 @@ strlen(char*）函数求的是字符串的实际长度，它求得方法是从�
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2014/06/16/or/" title="异或交换两个数字不可取">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  异或交换两个数字不可取</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2014/06/03/LinuxThread/"  title="《Linux多线程编程》读书笔记">
+<a href="/2014/06/19/cpp_complier_linkermd/"  title="C++编译链接模型笔记">
  <strong>NEXT:</strong><br/> 
- <span>《Linux多线程编程》读书笔记
+ <span>C++编译链接模型笔记
 </span>
 </a>
 </div>
@@ -154,7 +153,7 @@ strlen(char*）函数求的是字符串的实际长度，它求得方法是从�
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  
+  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#注明：本文来源于网络，我只是在这里做一个备份。"><span class="toc-number">1.</span> <span class="toc-text">注明：本文来源于网络，我只是在这里做一个备份。</span></a></li></ol>
   </div>
 
 <div id="asidepart">
